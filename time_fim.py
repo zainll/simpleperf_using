@@ -13,26 +13,35 @@ class LibtSet(object):
     def ppp(self):
         pass
 
-def get_data(record_file, binary_cache):
+def get_data(record_file, symfs_dir):
+    print(record_file)
     lib = ReportLib()
     lib.SetRecordFile(record_file)
     lib.ShowIpForUnknownSymbol()
     lib.ShowArtFrames()
-    lib.SetSymfs()
+    if symfs_dir:
+        lib.SetSymfs(symfs_dir)
     libs = LibtSet()
 
-    lib.MetaInfo()
-    lib.GetRecordCmd()
-    lib.GetArch()
+    print(lib.MetaInfo())
+    print(lib.GetRecordCmd())
+    print(lib.GetArch())
+
+    while True:
+        current_sample = lib.GetNextSample()
+        if not current_sample:
+            break
+
+
 
     pass
 
-if __name__ == "main":
-    record_file = sys.argv[0]
-    output_path = sys.argv[1]
+if __name__ == "__main__":
+    record_file = sys.argv[1]
+    output_path = sys.argv[2]
     #binary_cache
-    binary_cache = ''
-    get_data(record_file, binary_cache)
+    symfs_dir = None
+    get_data(record_file, symfs_dir)
 
 
 
