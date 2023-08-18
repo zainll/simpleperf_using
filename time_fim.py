@@ -26,13 +26,16 @@ def get_data(record_file, symfs_dir):
     print(lib.MetaInfo())
     print(lib.GetRecordCmd())
     print(lib.GetArch())
-    call_stakk = []
+    call_stack_info = []
     while True:
         current_sample = lib.GetNextSample()
         if not current_sample:
+            lib.Close()
             break
-
-
+        sample_event = lib.GetEventOfCurrentSample()
+        symbol = lib.GetSymbolOfCurrentSample()
+        callchain = lib.GetCallChainOfCurrentSample()
+        
 
     pass
 
